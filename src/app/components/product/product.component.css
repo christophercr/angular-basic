@@ -33,20 +33,13 @@ img {
   margin-top: 5px;
 }
 
-.cart {
-  margin-right: 25px;
-  float: right;
-  border: 1px solid #d8d8d8;
-  padding: 5px 20px;
-}
-
 button {
   margin-top: 30px;
   border: none;
   background-color: #1E95EA;
   color: white;
   height: 40px;
-  width: 100px;
+  width: 150px;
   font-size: 14px;
 }
 
@@ -65,21 +58,6 @@ input {
   width: 100%;
   height: 25px;
   margin-bottom: 20px;
-}
-
-textarea {
-  width: 100%;
-  height: 60px;
-}
-
-.tab {
-  margin-left: 20px;
-  cursor: pointer;
-}
-
-.activeTab {
-  color: #16C0B0;
-  text-decoration: underline;
 }
 
 .strike-through {

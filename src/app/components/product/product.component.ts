@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'product',
@@ -7,14 +7,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ProductComponent implements OnInit {
 
+  @Input() premium;
+  @Output() addedToCart = new EventEmitter();
+  @Output() removedFromCart = new EventEmitter();
+
   product = 'Shirts';
   description = 'You should try them!';
   selectedVariant = 0;
   imageTooltip = 'They are awesome!';
   link = 'https://www.google.com/search?q=angular+shirt&tbm=isch';
   onSale = true;
-  cart = 0;
   brand = 'Angular';
+  reviews = [];
 
   details = ['100% cotton', 'White', 'Red logo'];
   sizes = ['large', 'medium', 'small'];
@@ -42,7 +46,7 @@ export class ProductComponent implements OnInit {
   }
 
   get inventory() {
-    return this.variants[this.selectedVariant].quantity
+    return this.variants[this.selectedVariant].quantity;
   }
 
   get sale() {
@@ -53,17 +57,27 @@ export class ProductComponent implements OnInit {
     }
   }
 
+  get shipping() {
+    if (this.premium) {
+      return 'Free';
+    }
+    return 4.50;
+  }
+
   addToCart() {
-    this.cart += 1;
+    this.addedToCart.emit(this.variants[this.selectedVariant].id);
   }
 
   removeFromCart() {
-    this.cart -= 1;
+    this.removedFromCart.emit(this.variants[this.selectedVariant].id);
   }
 
   updateProduct(variantIndex) {
     this.selectedVariant = variantIndex;
-    console.log('variantIndex', variantIndex);
+  }
+
+  addReview(productReview) {
+    this.reviews.push(productReview);
   }
 
   trackItemFn(item, index) {

@@ -16,9 +16,7 @@
 
     <p>{{sale}}</p>
 
-    <ul>
-      <li *ngFor="let detail of details">{{detail}}</li>
-    </ul>
+    <product-details [details]="details"></product-details>
 
     <div *ngFor="let variant of variants, index as idx; trackBy: trackItemFn"
          class="color-box"
@@ -30,14 +28,16 @@
       <li *ngFor="let size of sizes">{{size}}</li>
     </ul>
 
-    <div class="cart">
-      <p>Cart({{ cart }})</p>
-    </div>
+    <p>Shipping: {{shipping}}</p>
 
     <button (click)="addToCart()"
             [ngClass]="{ disabledButton: inventory === 0 }"
             [disabled]="inventory === 0">Add to Cart
     </button>
+
+    <button (click)="removeFromCart()">Remove from Cart</button>
+
+    <product-tabs [reviews]="reviews"></product-tabs>
     <!--<button (click)="removeFromCart()">Remove from Cart</button>-->
   </div>
 </div>

@@ -1,0 +1,36 @@
+<form class="review-form" [formGroup]="reviewForm">
+
+  <div *ngIf="reviewForm.invalid">
+    <ul>
+      <li *ngFor="let error of errors">{{error}}</li>
+    </ul>
+  </div>
+
+  <p>
+    <label for="name">Name:</label>
+    <input id="name" name="name" formControlName="name">
+    <span>{{ reviewForm.get('name').errors | json }}</span>
+  </p>
+
+  <p>
+    <label for="review">Review:</label>
+    <textarea id="review" name="review" formControlName="review"></textarea>
+    <span>{{ reviewForm.get('review').errors | json }}</span>
+  </p>
+
+  <p>
+    <label for="rating">Rating:</label>
+    <select id="rating" name="rating" formControlName="rating">
+      <option>5</option>
+      <option>4</option>
+      <option>3</option>
+      <option>2</option>
+      <option>1</option>
+    </select>
+  </p>
+
+  <p>
+    <input type="submit" value="Submit" (click)="onSubmit()">
+    <span>{{ reviewForm.valid | json }}</span>
+  </p>
+</form>
