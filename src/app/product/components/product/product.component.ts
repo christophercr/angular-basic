@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'product',
@@ -20,20 +21,21 @@ export class ProductComponent implements OnInit {
   brand = 'Angular';
   reviews = [];
 
-  details = ['100% cotton', 'White', 'Red logo'];
   sizes = ['large', 'medium', 'small'];
   variants = [
     {
       id: '1',
       color: 'white',
       image: './assets/shirt-white.jpg',
-      quantity: 0
+      quantity: 0,
+      details: []
     },
     {
       id: '2',
       color: 'blue',
       image: './assets/shirt-blue.jpg',
-      quantity: 10
+      quantity: 10,
+      details: []
     }
   ];
 
@@ -64,6 +66,30 @@ export class ProductComponent implements OnInit {
     return 4.50;
   }
 
+  get details() {
+    return this.variants[this.selectedVariant].details;
+  }
+
+  constructor(public productService: ProductService) {
+  }
+
+  fetchProductDetails() {
+    for (const variant of this.variants) {
+      /* const httpSubscription = */this.productService.getProductDetails(variant.id).subscribe(
+        (details: string[]) => {  // success scenario
+          variant.details = details;
+        },
+        (error) => { // error scenario
+          console.error('You should not see this error because it is handled in the ProductService!!');
+        }
+      );
+
+      // setTimeout(() => {
+      //   httpSubscription.unsubscribe(); // cancel the Http request
+      // }, 800);
+    }
+  }
+
   addToCart() {
     this.addedToCart.emit(this.variants[this.selectedVariant].id);
   }
@@ -84,9 +110,7 @@ export class ProductComponent implements OnInit {
     return item.id;
   }
 
-  constructor() {
-  }
-
   ngOnInit() {
+    this.fetchProductDetails();
   }
 }

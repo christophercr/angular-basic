@@ -5,7 +5,7 @@ export function badWordsValidator(): ValidatorFn {
     let validationResult = null;
     const badWordsRegexp = /(bad|ugly|shit|sucks|crap)/g;
 
-    if (control.value.match(badWordsRegexp)) {
+    if (control.value && control.value.match(badWordsRegexp)) {
       validationResult = {badWords: control.value.match(badWordsRegexp)};
     }
 

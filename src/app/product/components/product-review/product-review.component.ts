@@ -17,9 +17,6 @@ export class ProductReviewComponent implements OnInit {
     rating: new FormControl(null, Validators.required)
   });
 
-  name = 'something';
-  review = null;
-  rating = null;
   errors = [];
 
   constructor() {
@@ -32,16 +29,16 @@ export class ProductReviewComponent implements OnInit {
     this.errors = [];
     if (this.reviewForm.valid) {
       const productReview = {
-        name: this.name,
-        review: this.review,
-        rating: this.rating
+        name: this.reviewForm.get('name').value,
+        review: this.reviewForm.get('review').value,
+        rating: this.reviewForm.get('rating').value
       };
       this.reviewSubmitted.emit(productReview);
 
       // reset values
-      this.name = null;
-      this.review = null;
-      this.rating = null;
+      this.reviewForm.get('name').reset();
+      this.reviewForm.get('review').reset();
+      this.reviewForm.get('rating').reset();
     } else {
       if (this.reviewForm.get('name').invalid) {
         this.errors.push('Name required');

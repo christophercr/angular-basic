@@ -1,0 +1,12 @@
+{
+  "product-details": [
+    {
+      "id": 1,
+      "details": ["100% cotton", "White", "Red logo"]
+    },
+    {
+      "id": 2,
+      "details": ["50% polyester - 50% cotton", "Blue", "Red logo with white border"]
+    }
+  ]
+}

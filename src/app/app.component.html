@@ -1,5 +1,7 @@
-<product [premium]="premium" (addedToCart)="updateCart($event)" (removedFromCart)="removeFromCart($event)"></product>
+<nav>
+  <a routerLink="/home" routerLinkActive="active">Home</a>
+  <a routerLink="/store" routerLinkActive="active">Store</a>
+  <a routerLink="/about" routerLinkActive="active">About</a>
+</nav>
 
-<div class="cart">
-  <p>Cart({{ cart.length }})</p>
-</div>
+<router-outlet></router-outlet> <!-- Router placeholder -->
